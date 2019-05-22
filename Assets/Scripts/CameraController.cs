@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
 	public static CameraController instance { get { return _instance; } }
 
 	public Transform followTarget;
+	public float sensitivity = 5;
 	//
 
 	private void Start()
@@ -29,6 +30,6 @@ public class CameraController : MonoBehaviour
 	{
 		// Перемещение воуруг мяча
 		PointerEventData ped = (PointerEventData)bed;
-		transform.rotation *= Quaternion.AngleAxis(ped.delta.x, Vector3.up) * Quaternion.AngleAxis(-ped.delta.y, Vector3.right);
+		transform.rotation *= Quaternion.AngleAxis(ped.delta.x * sensitivity * Time.unscaledDeltaTime, Vector3.up) * Quaternion.AngleAxis(-ped.delta.y * sensitivity * Time.unscaledDeltaTime, Vector3.right);
 	}
 }
